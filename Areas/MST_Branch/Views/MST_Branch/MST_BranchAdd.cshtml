@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "AddBramch";
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+
+@model Nice_Admin_Panal.Areas.MST_Branch.Models.MST_BranchModel
+
+<main id="main" class="main">
+    <h1>Add/Edit Branch</h1>
+
+    <div class="container-fluid border border-dark p-4">
+        <form class="row">
+            @Html.HiddenFor(x=>x.BranchID)
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col">
+                <lable class="form-label">BranchName</lable>
+                <input type="text" class="form-control" asp-for="BranchName" />
+                <span asp-validation-for="BranchName" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <lable class="form-label">BranchCode</lable>
+
+                <input type="text" class="form-control" asp-for="BranchCode" />
+                <span asp-validation-for="BranchCode" class="text-danger"></span>
+            </div>
+            <div class="col-12 my-2">
+                <button type="submit" class="btn btn-primary" asp-area="MST_Branch" asp-controller="MST_Branch" asp-action="Save">Add</button>
+            </div>
+        </form>
+    </div>
+
+</main>

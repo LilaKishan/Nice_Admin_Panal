@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "AddCountry";
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+@model Nice_Admin_Panal.Areas.LOC_Country.Models.LOC_CountryModel;
+<main class="main" id="main">
+    <h1>Add/Edit Country</h1>
+
+    <div class="container-fluid border border-dark p-4">
+        <form class="row">
+            @Html.HiddenFor(x=>x.CountryID)
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col">
+                <lable class="form-label">CountryName</lable>
+                <input type="text" class="form-control" asp-for="CountryName" />
+            </div>
+            <div class="col">
+                <lable class="form-label">Countrycode</lable>
+
+                <input type="text" class="form-control" asp-for="CountryCode" />
+                <span asp-validation-for="CountryCode" class="text-danger"></span>
+            </div>
+            <div class="col-12 my-2">
+                <button type="submit" class="btn btn-primary" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Save">Add</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "AddCity";
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+@model Nice_Admin_Panal.Areas.LOC_City.Models.LOC_CityModel
+
+
+<main class="main" id="main">
+    <h1>Add/Edit City</h1>
+    <div class="container-fluid border border-dark p-4">
+
+        <form class="row" method="post">
+            @Html.HiddenFor(x=>x.CityID)
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col-6">
+                <lable class="form-label">City Name</lable>
+                <input type="text" class="form-control" asp-for="CityName" />
+                <span asp-validation-for="CityName" class="text-danger"></span>
+            </div>
+            <div class="col-6">
+                <lable class="form-label">City code</lable>
+                <input type="text" class="form-control" asp-for="CityCode" />
+                <span asp-validation-for="CityCode" class="text-danger"></span>
+            </div>
+            <div class="col-md">
+                <label for="inputState" class="form-label">State</label>
+                <select class="form-control" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                    <option value="">Select State</option>
+                </select>
+                <span asp-validation-for="StateID" class="text-danger"></span>
+            </div>
+            <div class="col-md">
+                <label for="inputState" class="form-label">Country</label>
+                <select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))" onchange="fnOnStateChange();">
+                    <option selected value="">Choose...</option>
+
+                    <span asp-validation-for="CountryID" class="text-danger"></span>
+                </select>
+            </div>
+            <div class="col-12 my-2">
+                <button type="submit" class="btn btn-primary" asp-area="LOC_City" asp-action="Save" asp-controller="LOC_City">Add</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+@section Scripts {
+    <script>
+        function fnOnStateChange() {
+            console.log("hiiiiii");
+            var CountryID = $("#CountryID").val();
+
+            if (CountryID !== "") {
+                $("#StateID").empty();
+                $("#StateID").append($("<option></option>").val("").html("Select State"));
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StateDropDownByCountryID", "LOC_City")" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result,
+                                function (key, value) {
+                                    $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                                });
+                        },
+                        error: function (r) {
+                            alert("Error while loading combobox.");
+                        }
+                    });
+            }
+            else {
+                $("#StateID").empty();
+                $("#StateID").append($("<option></option>").val("").html("Select State"));
+            }
+        }
+    </script>
+}
+
