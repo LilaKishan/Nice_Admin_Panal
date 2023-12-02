@@ -224,5 +224,8 @@ namespace Nice_Admin_Panal.Areas.LOC_State.Controllers
         }
 
         #endregion
+
+        public IActionResult Back() { return RedirectToAction("LOC_StateList"); }
+
     }
 }

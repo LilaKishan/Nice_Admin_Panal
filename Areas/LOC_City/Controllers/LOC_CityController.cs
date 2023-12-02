@@ -327,5 +327,7 @@ namespace Nice_Admin_Panal.Areas.LOC_City.Controllers
             return View("LOC_CityList", dt);
         }
         #endregion
+        public IActionResult Back() { return RedirectToAction("LOC_CityList"); }
+
     }
 }

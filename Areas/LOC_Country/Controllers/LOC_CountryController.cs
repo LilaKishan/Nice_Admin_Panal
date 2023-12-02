@@ -14,7 +14,7 @@ namespace Nice_Admin_Panal.Areas.LOC_Country.Controllers
         {
             Configuration = _configuration;
         }
-        #region Country_List
+        #region LOC_CountryList
         public IActionResult LOC_CountryList()
         {
             string connectionstr = this.Configuration.GetConnectionString("myConnectionString");
@@ -120,5 +120,7 @@ namespace Nice_Admin_Panal.Areas.LOC_Country.Controllers
         }
 
         #endregion
+
+        public IActionResult Back() { return RedirectToAction("LOC_CountryList"); }
     }
 }

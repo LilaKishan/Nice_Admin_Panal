@@ -291,5 +291,7 @@ namespace Nice_Admin_Panal.Areas.MST_Student.Controllers
             return View("MST_StudentList", dt);
         }
         #endregion
+        public IActionResult Back() { return RedirectToAction("MST_StudentList"); }
+    
     }
 }

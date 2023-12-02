@@ -122,5 +122,7 @@ namespace Nice_Admin_Panal.Areas.MST_Branch.Controllers
         }
 
         #endregion
+
+        public IActionResult Back() { return RedirectToAction("MST_BranchList"); }
     }
 }
