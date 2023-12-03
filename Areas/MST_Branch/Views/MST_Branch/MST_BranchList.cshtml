@@ -47,7 +47,7 @@
 <table class="table table-bordered table-hover text-center">
     <thead>
         <tr>
-            <th scope="col">BranchID</th>
+            
             <th scope="col">BranchName</th>
             <th scope="col">BranchCode</th>
             <th scope="col">Created</th>
@@ -60,7 +60,7 @@
         @foreach (DataRow dr in Model.Rows)
         {
             <tr>
-                <th scope="row">@dr["BranchID"]</th>
+                
                 <td>@dr["BranchName"]</td>
                 <td>@dr["BranchCode"]</td>
                 <td>@Convert.ToDateTime(dr["Created"]).ToString()</td>

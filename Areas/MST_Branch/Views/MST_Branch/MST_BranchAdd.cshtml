@@ -13,20 +13,23 @@
             @Html.HiddenFor(x=>x.BranchID)
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="col">
-                <lable class="form-label">BranchName</lable>
+                <lable class="form-label"><span class="text-danger">*</span>BranchName</lable>
                 <input type="text" class="form-control" asp-for="BranchName" />
                 <span asp-validation-for="BranchName" class="text-danger"></span>
             </div>
             <div class="col">
-                <lable class="form-label">BranchCode</lable>
+                <lable class="form-label"><span class="text-danger">*</span>BranchCode</lable>
 
                 <input type="text" class="form-control" asp-for="BranchCode" />
                 <span asp-validation-for="BranchCode" class="text-danger"></span>
             </div>
             <div class="col-12 my-2">
                 <button type="submit" class="btn btn-primary" asp-area="MST_Branch" asp-controller="MST_Branch" asp-action="Save">Add</button>
-                <button class="btn btn-success align-middle" type="submit" asp-area="MST_Branch" asp-controller="MST_Branch" asp-action="Back">Back</button>
+                
             </div>
+        </form>
+        <form>
+            <button class="btn btn-success align-middle" type="submit" asp-area="MST_Branch" asp-controller="MST_Branch" asp-action="Back">Back</button>
         </form>
     </div>
 

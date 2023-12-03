@@ -11,11 +11,12 @@
             @Html.HiddenFor(x=>x.CountryID)
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="col">
-                <lable class="form-label">CountryName</lable>
+                <lable class="form-label"><span class="text-danger">*</span>CountryName</lable>
                 <input type="text" class="form-control" asp-for="CountryName" />
+                <span asp-validation-for="CountryName" class="text-danger"></span>
             </div>
             <div class="col">
-                <lable class="form-label">Countrycode</lable>
+                <lable class="form-label"><span class="text-danger">*</span>Countrycode</lable>
 
                 <input type="text" class="form-control" asp-for="CountryCode" />
                 <span asp-validation-for="CountryCode" class="text-danger"></span>
@@ -24,8 +25,10 @@
                 
                 <button type="submit" class="btn btn-primary" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Save">Add</button>
                 
-                <button class="btn btn-success align-middle" type="submit" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Back">Back</button>
             </div>
+        </form>
+        <form>
+            <button class="btn btn-success align-middle" type="submit" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Back">Back</button>
         </form>
     </div>
 </main>

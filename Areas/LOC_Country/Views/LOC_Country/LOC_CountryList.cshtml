@@ -59,7 +59,7 @@
         <table class="table table-bordered table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">CountryId</th>
+                    @*<th scope="col">CountryId</th>*@
                     <th scope="col">CountryName</th>
                     <th scope="col">Country code</th>
                     <th scope="col">Created</th>
@@ -72,7 +72,7 @@
                 @foreach (DataRow dr in Model.Rows)
                 {
                     <tr>
-                        <th scope="row">@dr["CountryID"]</th>
+                        @*<th scope="row">@dr["CountryID"]</th>*@
                         <td>@dr["CountryName"]</td>
                         <td>@dr["CountryCode"]</td>
                         <td>@Convert.ToDateTime(dr["Created"]).ToString()</td>

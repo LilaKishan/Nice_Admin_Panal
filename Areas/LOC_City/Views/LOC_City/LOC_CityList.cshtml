@@ -1,4 +1,5 @@
 ﻿@{
+    ViewData["Title"] = "City List";
     Layout = "~/Views/shared/_Layout.cshtml";
     LOC_CityFilterModel FilterModel = new LOC_CityFilterModel();
 }
@@ -67,7 +68,7 @@
         <table class="table table-bordered table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">CityID</th>
+                   @* <th scope="col">CityID</th>*@
                     <th scope="col">CityName</th>
                     <th scope="col">CityCode</th>
                     <th scope="col">CountryName</th>
@@ -81,7 +82,7 @@
                 @foreach (DataRow dr in Model.Rows)
                 {
                     <tr>
-                        <td>@dr["CityID"]</td>
+                        @*<td>@dr["CityID"]</td>*@
                         <td>@dr["CityName"]</td>
                         <td>@dr["CityCode"]</td>
                         <td>@dr["CountryName"]</td>

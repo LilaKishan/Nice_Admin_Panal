@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Nice_Admin_Panal.Areas.LOC_State.Models
 {
@@ -10,7 +11,8 @@ namespace Nice_Admin_Panal.Areas.LOC_State.Models
         [Required]
         public string? StateCode { get; set; }
         public string? CountryName { get; set; }
-        [Required]
+        [Required,DisplayName("Country")]
+       
         public int? CountryID { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
