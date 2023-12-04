@@ -7,6 +7,7 @@ using System.Reflection;
 using Nice_Admin_Panal.Areas.LOC_City.Models;
 using Nice_Admin_Panal.Areas.LOC_Country.Models;
 using Nice_Admin_Panal.Areas.LOC_State.Models;
+using Nice_Admin_Panal.DAL.LOC_City;
 
 namespace Nice_Admin_Panal.Areas.LOC_City.Controllers
 {
@@ -76,16 +77,20 @@ namespace Nice_Admin_Panal.Areas.LOC_City.Controllers
             ViewBag.StateList = list2;
 
             #endregion
+            LOC_CityDAL dalLOC_City = new LOC_CityDAL();
+            DataTable dtCity = dalLOC_City.dbo_PR_LOC_City_SelectAll();
 
-            DataTable dt = new DataTable();
-            SqlConnection connection = new SqlConnection(connectionStr);
-            connection.Open();
-            SqlCommand objCmd = connection.CreateCommand();
-            objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_LOC_City_SelectAll";
-            SqlDataReader objSDR = objCmd.ExecuteReader();
-            dt.Load(objSDR);
-            return View("LOC_CityList", dt);
+            return View("LOC_CityList", dtCity);
+
+            //DataTable dt = new DataTable();
+            //SqlConnection connection = new SqlConnection(connectionStr);
+            //connection.Open();
+            //SqlCommand objCmd = connection.CreateCommand();
+            //objCmd.CommandType = CommandType.StoredProcedure;
+            //objCmd.CommandText = "PR_LOC_City_SelectAll";
+            //SqlDataReader objSDR = objCmd.ExecuteReader();
+            //dt.Load(objSDR);
+
         }
         #endregion
 

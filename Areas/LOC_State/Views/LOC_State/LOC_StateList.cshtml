@@ -91,7 +91,7 @@
                             <div class="me-2">
                                 <form method="post" asp-area="LOC_State" asp-controller="LOC_State" asp-action="LOC_StateDelete">
                                     <input type="hidden" value="@Convert.ToInt32(dr["StateID"])" name="StateID" />
-                                    <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                                    <button type="submit" class="btn btn-danger" value="Delete" onclick="return deleteAlert();">Delete</button>
                                 </form>
                             </div>
                             <div class="ms-2">
@@ -122,5 +122,13 @@
                 });
             });
         });
+        function deleteAlert() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     </script>
 }

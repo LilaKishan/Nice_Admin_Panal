@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Nice_Admin_Panal.Areas.LOC_Country.Models;
 using Nice_Admin_Panal.Areas.LOC_State.Models;
+using Nice_Admin_Panal.DAL.LOC_State;
 
 namespace Nice_Admin_Panal.Areas.LOC_State.Controllers
 {
@@ -47,17 +48,20 @@ namespace Nice_Admin_Panal.Areas.LOC_State.Controllers
 
             #endregion
 
+            LOC_StateDAL dalLOC_State = new LOC_StateDAL();
+            DataTable dtState = dalLOC_State.dbo_PR_LOC_State_SelectAll();
 
+            return View("LOC_StateList", dtState);
 
-            DataTable dt = new DataTable();
-            SqlConnection connection = new SqlConnection(connectionStr);
-            connection.Open();
-            SqlCommand objCmd = connection.CreateCommand();
-            objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_LOC_State_SelectAll";
-            SqlDataReader objSDR = objCmd.ExecuteReader();
-            dt.Load(objSDR);
-            return View("LOC_StateList", dt);
+            //DataTable dt = new DataTable();
+            //SqlConnection connection = new SqlConnection(connectionStr);
+            //connection.Open();
+            //SqlCommand objCmd = connection.CreateCommand();
+            //objCmd.CommandType = CommandType.StoredProcedure;
+            //objCmd.CommandText = "PR_LOC_State_SelectAll";
+            //SqlDataReader objSDR = objCmd.ExecuteReader();
+            //dt.Load(objSDR);
+
         }
 
         #endregion

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
-using Nice_Admin_Panal.Areas.LOC_Country.Models; 
+using Nice_Admin_Panal.Areas.LOC_Country.Models;
+using Nice_Admin_Panal.DAL.LOC_Country;
 
 namespace Nice_Admin_Panal.Areas.LOC_Country.Controllers
 {
@@ -17,22 +18,31 @@ namespace Nice_Admin_Panal.Areas.LOC_Country.Controllers
         #region LOC_CountryList
         public IActionResult LOC_CountryList()
         {
-            string connectionstr = this.Configuration.GetConnectionString("myConnectionString");
-            DataTable table = new DataTable();
-            SqlConnection connection = new SqlConnection(connectionstr);
-            connection.Open();
-            SqlCommand objcmd = connection.CreateCommand();
-            objcmd.CommandType = CommandType.StoredProcedure;
-            objcmd.CommandText = "PR_LOC_Country_selectall";
-            SqlDataReader objSDR = objcmd.ExecuteReader();
-            table.Load(objSDR);
-            return View("LOC_CountryList", table);
+            //string connectionstr = this.Configuration.GetConnectionString("myConnectionString");
+
+            LOC_CountryDAL dalLOC_Country =new LOC_CountryDAL();
+            DataTable dt = dalLOC_Country.dbo_PR_LOC_Country_selectall();
+            return View("LOC_CountryList", dt);
+
+            //DataTable table = new DataTable();
+            //SqlConnection connection = new SqlConnection(connectionstr);
+            //connection.Open();
+            //SqlCommand objcmd = connection.CreateCommand();
+            //objcmd.CommandType = CommandType.StoredProcedure;
+            //objcmd.CommandText = "PR_LOC_Country_selectall";
+            //SqlDataReader objSDR = objcmd.ExecuteReader();
+            //table.Load(objSDR);
+
+
         }
         #endregion
+
         #region Country_Delete
         public IActionResult LOC_Country_Delete(int CountryId)
         {
             string connstr = this.Configuration.GetConnectionString("myConnectionString");
+
+
             SqlConnection connection = new SqlConnection(connstr);
             connection.Open();
             SqlCommand objcmd = connection.CreateCommand();
@@ -44,6 +54,8 @@ namespace Nice_Admin_Panal.Areas.LOC_Country.Controllers
             return RedirectToAction("LOC_CountryList");
         }
         #endregion
+
+
         #region Country_Add
         public IActionResult Save(LOC_CountryModel model)
         {
