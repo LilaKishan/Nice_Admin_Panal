@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Nice_Admin_Panal.BAL;
 using Nice_Admin_Panal.Models;
 using System.Diagnostics;
 
+
 namespace Nice_Admin_Panal.Controllers
 {
+    [CheckAccess]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

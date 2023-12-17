@@ -4,8 +4,11 @@ using System.Data;
 using Nice_Admin_Panal.Areas.MST_Student.Models;
 using Nice_Admin_Panal.Areas.MST_Branch.Models;
 using Nice_Admin_Panal.Areas.LOC_City.Models;
+using Nice_Admin_Panal.BAL;
+
 namespace Nice_Admin_Panal.Areas.MST_Student.Controllers
 {
+    [CheckAccess]
     [Area("MST_Student")]
     [Route("MST_Student/[controller]/[action]")]
     public class MST_StudentController : Controller

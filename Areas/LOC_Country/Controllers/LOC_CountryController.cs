@@ -3,9 +3,11 @@ using System.Data;
 using System.Data.SqlClient;
 using Nice_Admin_Panal.Areas.LOC_Country.Models;
 using Nice_Admin_Panal.DAL.LOC_Country;
+using Nice_Admin_Panal.BAL;
 
 namespace Nice_Admin_Panal.Areas.LOC_Country.Controllers
 {
+    [CheckAccess]
     [Area("LOC_Country")]
     [Route("LOC_Country/[controller]/[action]")]
     public class LOC_CountryController : Controller

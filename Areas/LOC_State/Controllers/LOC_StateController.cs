@@ -4,9 +4,11 @@ using System.Data.SqlClient;
 using Nice_Admin_Panal.Areas.LOC_Country.Models;
 using Nice_Admin_Panal.Areas.LOC_State.Models;
 using Nice_Admin_Panal.DAL.LOC_State;
+using Nice_Admin_Panal.BAL;
 
 namespace Nice_Admin_Panal.Areas.LOC_State.Controllers
 {
+    [CheckAccess]
     [Area("LOC_State")]
     [Route("LOC_State/[controller]/[action]")]
     public class LOC_StateController : Controller

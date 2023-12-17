@@ -2,9 +2,11 @@
 using System.Data;
 using System.Data.SqlClient;
 using Nice_Admin_Panal.Areas.MST_Branch.Models;
+using Nice_Admin_Panal.BAL;
 
 namespace Nice_Admin_Panal.Areas.MST_Branch.Controllers
 {
+    [CheckAccess]
     [Area("MST_Branch")]
     [Route("MST_Branch/[controller]/[action]")]
     public class MST_BranchController : Controller

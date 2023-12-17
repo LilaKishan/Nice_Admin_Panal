@@ -8,9 +8,11 @@ using Nice_Admin_Panal.Areas.LOC_City.Models;
 using Nice_Admin_Panal.Areas.LOC_Country.Models;
 using Nice_Admin_Panal.Areas.LOC_State.Models;
 using Nice_Admin_Panal.DAL.LOC_City;
+using Nice_Admin_Panal.BAL;
 
 namespace Nice_Admin_Panal.Areas.LOC_City.Controllers
 {
+    [CheckAccess]
     [Area("LOC_City")]
     [Route("LOC_City/[controller]/[action]")]
     public class LOC_CityController : Controller
