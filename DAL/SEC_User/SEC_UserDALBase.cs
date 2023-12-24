@@ -15,8 +15,8 @@ namespace Nice_Admin_Panal.DAL.SEC_User
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnectionString);
                 DbCommand dbCommand = sqlDB.GetStoredProcCommand("PR_SEC_User_SelectByUsernameAndPassword");
-                sqlDB.AddInParameter(dbCommand,"@UserName",DbType.String,UserName);
-                sqlDB.AddInParameter(dbCommand, "@Password", DbType.String, Password);
+                sqlDB.AddInParameter(dbCommand,"@UserName",SqlDbType.VarChar,UserName);
+                sqlDB.AddInParameter(dbCommand, "@Password", SqlDbType.VarChar, Password);
 
                 DataTable dt = new DataTable();
                 using (IDataReader dr=sqlDB.ExecuteReader(dbCommand))
@@ -30,14 +30,14 @@ namespace Nice_Admin_Panal.DAL.SEC_User
         #endregion
 
         #region  dbo_PR_SEC_User_Register
-        public bool dbo_PR_SEC_User_Register(SEC_UserModel sEC_UserModel)
+        public bool dbo_PR_SEC_User_Register(string UserName, string Password, string FirstName, string LastName, string Email, string PhotoPath)
         {
             try
             {
 
                 SqlDatabase sqlDB = new SqlDatabase(ConnectionString);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_SEC_User_SelectByUsername");
-                sqlDB.AddInParameter(dbCMD, "UserName", SqlDbType.VarChar, sEC_UserModel.UserName);
+                sqlDB.AddInParameter(dbCMD, "UserName", SqlDbType.VarChar, UserName);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDB.ExecuteReader(dbCMD))
                 {
@@ -50,14 +50,15 @@ namespace Nice_Admin_Panal.DAL.SEC_User
                 else
                 {
                     DbCommand dbCMD1 = sqlDB.GetStoredProcCommand("PR_SEC_User_Insert");
-                    sqlDB.AddInParameter(dbCMD1, "@UserName", DbType.String, sEC_UserModel.UserName);
-                    sqlDB.AddInParameter(dbCMD1, "@Password", DbType.String, sEC_UserModel.Password);
-                    sqlDB.AddInParameter(dbCMD1, "@FirstName", DbType.String, sEC_UserModel.FirstName);
-                    sqlDB.AddInParameter(dbCMD1, "@LastName", DbType.String, sEC_UserModel.LastName);
-                    sqlDB.AddInParameter(dbCMD1, "@PhotoPath", DbType.String, sEC_UserModel.PhotoPath);
-                    sqlDB.AddInParameter(dbCMD1, "@Email", DbType.String, sEC_UserModel.Email);
-                   // sqlDB.AddInParameter(dbCMD1, "@Created", SqlDbType.DateTime, DBNull.Value);
-                  //  sqlDB.AddInParameter(dbCMD1, "@Modified", SqlDbType.DateTime, DBNull.Value);
+                    sqlDB.AddInParameter(dbCMD1, "@UserName", SqlDbType.VarChar, UserName);
+                    sqlDB.AddInParameter(dbCMD1, "@Password", SqlDbType.VarChar, Password);
+                    sqlDB.AddInParameter(dbCMD1, "@FirstName", SqlDbType.VarChar,FirstName);
+                    sqlDB.AddInParameter(dbCMD1, "@LastName", SqlDbType.VarChar, LastName);
+                    sqlDB.AddInParameter(dbCMD1, "@PhotoPath", SqlDbType.VarChar,PhotoPath);
+                    sqlDB.AddInParameter(dbCMD1, "@Email", SqlDbType.VarChar, Email);
+                    sqlDB.AddInParameter(dbCMD1, "Created", SqlDbType.DateTime, DBNull.Value);
+                    sqlDB.AddInParameter(dbCMD1, "Modified", SqlDbType.DateTime, DBNull.Value);
+                    Console.WriteLine(dbCMD1);
                     if (Convert.ToBoolean(sqlDB.ExecuteNonQuery(dbCMD1)))
                     {
                         return true;

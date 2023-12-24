@@ -124,8 +124,8 @@ namespace Nice_Admin_Panal.Areas.SEC_User.Controllers
         #region  Register
         public IActionResult Register(SEC_UserModel sEC_UserModel)
         {
-            SEC_UserDAL sEC_UserDAL = new SEC_UserDAL();
-            bool IsSuccess = sEC_UserDAL.dbo_PR_SEC_User_Register(sEC_UserModel);
+           
+            bool IsSuccess = DALSec_User.dbo_PR_SEC_User_Register(sEC_UserModel.UserName, sEC_UserModel.Password, sEC_UserModel.FirstName, sEC_UserModel.LastName, sEC_UserModel.Email, sEC_UserModel.PhotoPath);
             Console.WriteLine(IsSuccess);
             if (IsSuccess)
             {

@@ -5,7 +5,8 @@ namespace Nice_Admin_Panal.Areas.SEC_User.Models
 {
     public class SEC_UserModel
     {
-        public int? UserId { get; set; }
+
+        public int? UserID { get; set; }
         [Required]
         [DisplayName("User name")]
         public string UserName { get; set; }
