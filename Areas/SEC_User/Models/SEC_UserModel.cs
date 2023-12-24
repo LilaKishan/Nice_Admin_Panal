@@ -12,11 +12,12 @@ namespace Nice_Admin_Panal.Areas.SEC_User.Models
         [Required]
         [DisplayName("Password")]
         public string Password { get; set; }
+
         public string? PhotoPath { get; set; }
         public string? Email { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime Modified { get; set; }
+        public DateTime? Created { get; set; }
+        public DateTime? Modified { get; set; }
     }
 }

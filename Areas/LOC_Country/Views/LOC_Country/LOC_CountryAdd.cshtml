@@ -2,24 +2,24 @@
     ViewData["Title"] = "AddCountry";
     Layout = "~/Views/shared/_Layout.cshtml";
 }
-@model Nice_Admin_Panal.Areas.LOC_Country.Models.LOC_CountryModel;
+@model Nice_Admin_Panal.Areas.LOC_Country.Models.LOC_CountryModel
 <main class="main" id="main">
     <h1>Add/Edit Country</h1>
 
     <div class="container-fluid border border-dark p-4">
         <form class="row">
             @Html.HiddenFor(x=>x.CountryID)
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="text-danger"></div>
             <div class="col">
                 <lable class="form-label"><span class="text-danger">*</span>CountryName</lable>
                 <input type="text" class="form-control" asp-for="CountryName" />
-                <span asp-validation-for="CountryName" class="text-danger"></span>
+               @* <span asp-validation-for="CountryName" class="text-danger"></span>*@
             </div>
             <div class="col">
                 <lable class="form-label"><span class="text-danger">*</span>Countrycode</lable>
 
                 <input type="text" class="form-control" asp-for="CountryCode" />
-                <span asp-validation-for="CountryCode" class="text-danger"></span>
+                @*<span asp-validation-for="CountryCode" class="text-danger"></span>*@
             </div>
             <div class="col-12 my-2">
                 

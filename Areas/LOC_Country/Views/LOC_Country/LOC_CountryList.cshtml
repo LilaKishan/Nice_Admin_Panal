@@ -19,17 +19,17 @@
             <div class="container-fluid">
                 <div class="container-fluid border border-dark p-4">
 
-                    <form class="row">
+                    <form class="row " method="POST" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryFilter">
                         <div><h2>Filter</h2></div>
 
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="col-6">
                             <lable class="form-label">Select CountryName</lable>
-                            <input type="text" placeholder="Select CountryName" asp-for="@filterModel.CountryName" class="form-control mt-2" id="inputAddress">
+                            <input type="text" placeholder="Select CountryName"  class="form-control mt-2" id="inputAddress">
                         </div>
                         <div class="col-6">
                             <lable class="form-label">Select CountryCode</lable>
-                            <input type="text" placeholder="Select CountryCode" asp-for="@filterModel.CountryCode" class="form-control mt-2" id="inputAddress">
+                            <input type="text" placeholder="Select CountryCode"  class="form-control mt-2" id="inputAddress">
                         </div>
                         <div class="col my-2">
                             <button type="submit" class="btn btn-primary" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryFilter">

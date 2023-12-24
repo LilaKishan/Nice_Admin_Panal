@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nice_Admin_Panal.Areas.SEC_User.Models;
 using Nice_Admin_Panal.BAL;
+using Nice_Admin_Panal.DAL.SEC_User;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,18 +12,21 @@ namespace Nice_Admin_Panal.Areas.SEC_User.Controllers
     [Route("SEC_User/[controller]/[action]")]
     public class SEC_UserController : Controller
     {
-       
 
-        private IConfiguration configuration;
-        public SEC_UserController(IConfiguration _counfiguration)
-        {
-            configuration = _counfiguration;
-        }
+
+        //private IConfiguration configuration;
+        //public SEC_UserController(IConfiguration _counfiguration)
+        //{
+        //    configuration = _counfiguration;
+        //}
+
+        SEC_UserDALBase DALSec_User = new SEC_UserDALBase();
         public IActionResult Login_Page()
         {
             return View();
         }
 
+        #region Login
         [HttpPost]
         public IActionResult Login(SEC_UserModel userLoginModel)
         {
@@ -45,27 +49,29 @@ namespace Nice_Admin_Panal.Areas.SEC_User.Controllers
 
             if (ModelState.IsValid)
             {
-                SqlConnection conn = new SqlConnection(this.configuration.GetConnectionString("myConnectionString"));
-                conn.Open();
+                //SqlConnection conn = new SqlConnection(this.configuration.GetConnectionString("myConnectionString"));
+                //conn.Open();
 
-                SqlCommand sqlCommand = conn.CreateCommand();
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.CommandText = "PR_SEC_User_SelectByUsernameAndPassword ";
-                sqlCommand.Parameters.AddWithValue("@UserName", userLoginModel.UserName);
-                sqlCommand.Parameters.AddWithValue("@Password", userLoginModel.Password);
+                //SqlCommand sqlCommand = conn.CreateCommand();
+                //sqlCommand.CommandType = CommandType.StoredProcedure;
+                //sqlCommand.CommandText = "PR_SEC_User_SelectByUsernameAndPassword ";
+                //sqlCommand.Parameters.AddWithValue("@UserName", userLoginModel.UserName);
+                //sqlCommand.Parameters.AddWithValue("@Password", userLoginModel.Password);
 
-                SqlDataReader objSDR = sqlCommand.ExecuteReader();
+                //SqlDataReader objSDR = sqlCommand.ExecuteReader();
 
-                DataTable dtLogin = new DataTable();
 
-                if (!objSDR.HasRows)
+
+                DataTable dtLogin = DALSec_User.dbo_PR_SEC_User_SelectByUserNamePassword(userLoginModel.UserName,userLoginModel.Password);
+
+                if (dtLogin.Rows.Count==0)
                 {
                     TempData["Error"] = "Invalid Username or Password";
                     return RedirectToAction("Login_Page", "SEC_User");
                 }
                 else
                 {
-                    dtLogin.Load(objSDR);
+                    //dtLogin.Load(objSDR);
                     if (dtLogin.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dtLogin.Rows)
@@ -92,20 +98,47 @@ namespace Nice_Admin_Panal.Areas.SEC_User.Controllers
                     }
                     Console.WriteLine("Login Fail");
 
-                    return RedirectToAction("Login_Page", "SEC_User");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 
             }
             return RedirectToAction("Index","Home");
         }
+        #endregion
 
-
+        #region Logout
         //Logout action to clear current session and redirect user to login page
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login_Page","SEC_User");
         }
+        #endregion
+
+        public IActionResult SEC_UserRegister()
+        {
+            return View();
+        }
+
+        #region  Register
+        public IActionResult Register(SEC_UserModel sEC_UserModel)
+        {
+            SEC_UserDAL sEC_UserDAL = new SEC_UserDAL();
+            bool IsSuccess = sEC_UserDAL.dbo_PR_SEC_User_Register(sEC_UserModel);
+            Console.WriteLine(IsSuccess);
+            if (IsSuccess)
+            {
+                return RedirectToAction("Login_Page");
+            }
+            else
+            {
+                return RedirectToAction("SEC_UserRegister");
+            }
+        }
+        #endregion
+
+
+
     }
 }

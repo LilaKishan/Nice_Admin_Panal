@@ -94,23 +94,26 @@ namespace Nice_Admin_Panal.Areas.LOC_State.Controllers
 
             SqlCommand objcmd = conn.CreateCommand();
             objcmd.CommandType = CommandType.StoredProcedure;
-
-            if (model.StateID == null)
+            if (ModelState.IsValid) 
             {
-                objcmd.CommandText = "PR_LOC_State_InsertDATA";
+                if (model.StateID == null)
+                {
+                    objcmd.CommandText = "PR_LOC_State_InsertDATA";
+
+                }
+                else
+                {
+                    objcmd.CommandText = "PR_LOC_State_updatebypk";
+                    objcmd.Parameters.AddWithValue("@StateID", model.StateID);
+                }
+
+                objcmd.Parameters.AddWithValue("@StateName", model.StateName);
+                objcmd.Parameters.AddWithValue("@StateCode", model.StateCode);
+                objcmd.Parameters.AddWithValue("@CountryID", model.CountryID);
+                objcmd.ExecuteNonQuery();
+                conn.Close();
 
             }
-            else
-            {
-                objcmd.CommandText = "PR_LOC_State_updatebypk";
-                objcmd.Parameters.AddWithValue("@StateID", model.StateID);
-            }
-
-            objcmd.Parameters.AddWithValue("@StateName", model.StateName);
-            objcmd.Parameters.AddWithValue("@StateCode", model.StateCode);
-            objcmd.Parameters.AddWithValue("@CountryID", model.CountryID);
-            objcmd.ExecuteNonQuery();
-            conn.Close();
 
             return RedirectToAction("LOC_StateList");
         }

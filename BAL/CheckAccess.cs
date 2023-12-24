@@ -7,7 +7,12 @@ namespace Nice_Admin_Panal.BAL
     {
         public void OnAuthorization(AuthorizationFilterContext filterContext)
         {
-            if (filterContext.HttpContext.Session.GetString("UserName") == null)
+            var rd = filterContext.RouteData;
+            string currentAction = rd.Values["action"].ToString();
+            string currentController = rd.Values["controller"].ToString();
+
+
+            if (filterContext.HttpContext.Session.GetString("UserID") == null)
             {
                 filterContext.Result = new RedirectResult("~/SEC_User/SEC_User/Login_Page");
             }
